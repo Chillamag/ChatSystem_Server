@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Chat System
+ *  Lavet af Gruppe 24 - DTU 2016
+ *  --------------------
+ *  Magnus Andrias Nielsen, s141899
+ *  --------------------
  */
 package server;
 
@@ -102,7 +104,6 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                         }catch(IllegalArgumentException e){
                             System.out.println("\nWrong username or password..\n");
                             tellEveryone(("a :"+ "s:" + loginError));
-                            tellEveryone(("Hej : :" + chat)); 
                         }
                         
                         
