@@ -47,7 +47,9 @@ public class ChatSystem_Server extends javax.swing.JFrame{
         @Override
         public void run(){
             
-            String message, connect = "Connect", disconnect = "Disconnect", chat = "Chat" , login = "Login";
+            String message, connect = "Connect", disconnect = "Disconnect", 
+                    chat = "Chat" , login = "Login", firstLogin = "firstLogin", 
+                    loginError = "LoginError";
             String[] data;
             
             try{
@@ -72,6 +74,13 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                         
                     }else if (data[2].equals(chat)){
                         tellEveryone(message);
+                    
+                    }else if (data[2].equals(firstLogin)){
+                        tellEveryone(message);
+                        
+                    //}else if (data[2].equals(loginError)){
+                        //tellEveryone(message);
+                        //System.out.println("\nWrong username or password..\n");
                         
                     }else if (data[2].equals(login)){
                         Brugeradmin ba = (Brugeradmin) Naming.lookup("rmi://javabog.dk/brugeradmin");
@@ -86,11 +95,16 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                             firstName = b.fornavn;
                             lastName = b.efternavn;
                             
-                            tellEveryone((firstName + " (" + data[0] + ")" + ":has connected." + ":" + chat));
+                            tellEveryone((firstName + " (" + data[0] + ")" + ":has connected." + ":" + firstLogin));
+                            
+                            userAdd(firstName+"("+data[0]+")");
                                   
                         }catch(IllegalArgumentException e){
-                            //System.out.println("\nWrong username or password..\n");
+                            System.out.println("\nWrong username or password..\n");
+                            tellEveryone(("a :"+ "s:" + loginError));
+                            tellEveryone(("Hej : :" + chat)); 
                         }
+                        
                         
                     }else{
                         System.out.println("No connection were met.\n");
@@ -99,7 +113,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                 }
                 
             }catch(Exception ex){
-                ex.printStackTrace();
+                //ex.printStackTrace();
                 clientOutputStreams.remove(client);
                 System.out.println("Lost a connection. \n");
             }
