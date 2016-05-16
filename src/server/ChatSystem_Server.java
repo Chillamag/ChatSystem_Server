@@ -19,7 +19,7 @@ import java.io.*;
 import java.rmi.Naming;
 import java.util.*;
 
-public class ChatSystem_Server extends javax.swing.JFrame{
+public class ChatSystem_Server{
 
     ArrayList clientOutputStreams;
     ArrayList<String> users;
@@ -41,7 +41,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                 reader = new BufferedReader(isReader);
                 
             }catch (Exception ex){
-                System.out.println("Unexpected error...\n");
+                //System.out.println("Unexpected error...\n");
             }
             
         }
@@ -58,7 +58,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                 
                 while ((message = reader.readLine()) != null){
                     
-                    System.out.println("Received: " + message + "\n");
+                    //System.out.println("Received: " + message + "\n");
                     data = message.split(":");
                     
                     /*for (String token:data){
@@ -102,13 +102,13 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                             userAdd(firstName+"("+data[0]+")");
                                   
                         }catch(IllegalArgumentException e){
-                            System.out.println("\nWrong username or password..\n");
+                            //System.out.println("\nWrong username or password..\n");
                             tellEveryone(("a :"+ "s:" + loginError));
                         }
                         
                         
                     }else{
-                        System.out.println("No connection were met.\n");
+                        //System.out.println("No connection were met.\n");
                     }
                     
                 }
@@ -116,7 +116,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
             }catch(Exception ex){
                 //ex.printStackTrace();
                 clientOutputStreams.remove(client);
-                System.out.println("Lost a connection. \n");
+                //System.out.println("Lost a connection. \n");
             }
             
         }
@@ -133,7 +133,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
                 ChatSystem_Server starter = new ChatSystem_Server();
                 starter.ServerStart();
                 
-                System.out.println("Server started...\n");
+                //System.out.println("Server started...\n");
             }
         });
                         
@@ -163,11 +163,11 @@ public class ChatSystem_Server extends javax.swing.JFrame{
 
                     Thread listener = new Thread(new ClientHandler(clientSock, writer));
                     listener.start();   
-                    System.out.println("Got a connection...\n");
+                    //System.out.println("Got a connection...\n");
                 }
                 
             }catch (Exception ex){
-                System.out.println("Error making a connection.\n");
+                //System.out.println("Error making a connection.\n");
             }
             
         }
@@ -178,7 +178,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
         
         String message, add = ": :Connect", done = "Server: :Done", name = data;
         users.add(name);
-        System.out.println(name + " was added.\n");
+        //System.out.println(name + " was added.\n");
         String[] tempList = new String[(users.size())];
         users.toArray(tempList);
         
@@ -215,7 +215,7 @@ public class ChatSystem_Server extends javax.swing.JFrame{
 		writer.println(message);
                 writer.flush();
             }catch (Exception ex){
-                System.out.println("Error telling everyone.\n");
+                //System.out.println("Error telling everyone.\n");
             }
             
         }
